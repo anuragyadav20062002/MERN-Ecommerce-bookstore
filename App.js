@@ -1,7 +1,7 @@
 const express = require("express")
 require("dotenv").config()
 const mongoose = require("mongoose")
-const userRoutes = require("./routes/auth")
+const authRoutes = require("./routes/auth")
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use(expressValidator())
 
 //routes
-app.use("/api", userRoutes)
+app.use("/api", authRoutes)
 
 const port = process.env.PORT || 8000
 app.listen(port, () => {

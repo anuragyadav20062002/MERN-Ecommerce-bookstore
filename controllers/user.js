@@ -55,3 +55,10 @@ exports.signin = (req, res) => {
     }
   })
 }
+
+exports.signout = (req, res) => {
+  //clearing cookie from response
+
+  res.clearCookie("t")
+  res.json({ message: "Signout success" })
+}

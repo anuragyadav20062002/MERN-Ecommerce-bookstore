@@ -2,6 +2,9 @@ const express = require("express")
 require("dotenv").config()
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/user")
+const morgan = require("morgan")
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 //app
 const app = express()
 
@@ -9,6 +12,11 @@ const app = express()
 mongoose
   .connect(process.env.DATABASE)
   .then(() => console.log("Database connected"))
+
+//middlewares
+app.use(morgan("dev"))
+app.use(bodyParser.json())
+app.use(cookieParser())
 
 //routes
 app.use("/api", userRoutes)

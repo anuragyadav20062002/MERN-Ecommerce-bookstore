@@ -1,8 +1,10 @@
 const User = require("../models/user")
 const { errorHandler } = require("../helpers/dbErrorHandler")
 const jwt = require("jsonwebtoken") // to generate signed token
-const expressJwt = require("express-jwt") //used for authorization check
+const { expressjwt } = require("express-jwt") //used for authorization check
 const { token } = require("morgan")
+
+//for authentication
 
 exports.signup = (req, res) => {
   console.log("req.body", req.body)
@@ -63,7 +65,7 @@ exports.signout = (req, res) => {
   res.json({ message: "Signout success" })
 }
 
-exports.requireSignin = expressJwt({
+exports.requireSignin = expressjwt({
   //so that only authorized user access resources
 
   secret: process.env.JWT_SECRET,

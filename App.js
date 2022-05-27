@@ -1,7 +1,7 @@
 const express = require("express")
 require("dotenv").config()
 const mongoose = require("mongoose")
-const userRoutes = require("./routes/user")
+const userRoutes = require("./routes/auth")
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")

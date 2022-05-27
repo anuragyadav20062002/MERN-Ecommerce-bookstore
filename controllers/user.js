@@ -26,16 +26,14 @@ exports.signin = (req, res) => {
   //find user based on email
 
   const { email, password } = req.body
-  User.findOne({ email }, (err, user) => {
-    if (err || user) {
-      return res.status(400).json({
-        err: "User with that email does not exists. Please Signup",
-      })
+  User.findOne({ email: email }, (err, user) => {
+    if (err || !user) {
+      return console.log("User not found please signup")
     }
-    if (user) {
-      //check for email and password check
-      //create a authenticate method in user model
 
+    //check for email and password check
+    //create a authenticate method in user model
+    if (user) {
       if (!user.authenticate(password)) {
         return res.status(401).json({
           message: "Wrong Email or Password",
@@ -44,7 +42,7 @@ exports.signin = (req, res) => {
 
       //generate a token with id and secret
 
-      token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
 
       //persist token as 't' in cookie with expiry date
 

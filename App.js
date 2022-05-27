@@ -11,7 +11,9 @@ const app = express()
 
 //database
 mongoose
-  .connect(process.env.DATABASE)
+  .connect(process.env.DATABASE, {
+    autoIndex: true,
+  })
   .then(() => console.log("Database connected"))
 
 //middlewares

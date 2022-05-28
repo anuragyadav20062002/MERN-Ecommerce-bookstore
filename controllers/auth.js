@@ -3,6 +3,7 @@ const { errorHandler } = require("../helpers/dbErrorHandler")
 const jwt = require("jsonwebtoken") // to generate signed token
 const { expressjwt } = require("express-jwt") //used for authorization check
 const { token } = require("morgan")
+const { ExposureTwoTone } = require("@material-ui/icons")
 
 //for authentication
 
@@ -72,3 +73,6 @@ exports.requireSignin = expressjwt({
   algorithms: ["HS256"], // newer version of express-jwt requiers algorithms
   userProperty: "auth",
 })
+
+
+ExposureTwoTone.

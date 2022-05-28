@@ -1,11 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const {
-  userById,
-  requireSignin,
-  isAdmin,
-  isAuth,
-} = require("../controllers/auth")
+const { requireSignin, isAdmin, isAuth } = require("../controllers/auth")
+
+const { userById } = require("../controllers/user")
 
 //Routes
 router.get("/secret/userId", requireSignin, isAuth, isAdmin, (req, res) => {

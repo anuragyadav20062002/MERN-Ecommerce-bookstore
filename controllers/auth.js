@@ -3,7 +3,6 @@ const { errorHandler } = require("../helpers/dbErrorHandler")
 const jwt = require("jsonwebtoken") // to generate signed token
 const { expressjwt } = require("express-jwt") //used for authorization check
 const { token } = require("morgan")
-const { ExposureTwoTone } = require("@material-ui/icons")
 
 //for authentication
 
@@ -74,5 +73,25 @@ exports.requireSignin = expressjwt({
   userProperty: "auth",
 })
 
+exports.isAuth = (req, res, next) => {
+  //so that one user cannot acess other user details or resources
 
-ExposureTwoTone.
+  let user = req.profile && req.auth && req.profile.id == req.auth._id
+  if (!user) {
+    return res.status(403).json({
+      error: "Access denied",
+    })
+  }
+
+  next()
+}
+
+exports.isAdmin = (req, res, next) => {
+  if (req.profile.role === 0) {
+    return res.status(403).json({
+      error: "Admin resources! Acess Denied",
+    })
+  }
+
+  next()
+}

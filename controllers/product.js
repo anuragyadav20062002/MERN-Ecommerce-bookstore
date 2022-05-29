@@ -2,31 +2,58 @@ const formidable = require("formidable")
 const _ = require("lodash")
 const fs = require("fs")
 const Product = require("../models/product")
+const bodyParser = require("body-parser")
 const { errorHandler } = require("../helpers/dbErrorHandler")
 
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm()
+
   form.keepExtensions = true
+
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
-        err: "Image cannot be uploaded",
+        error: "Image could not be uploaded" + err,
       })
-    }
+    } else {
+      let product = new Product(fields)
+      let { name, description, price, category, quantity, shipping } = fields
+      let photo = files.photo
 
-    let product = new Product(fields)
+      // validations
+      if (photo) {
+        if (files.photo.size > 1000000) {
+          return res.status(400).json({
+            error: "Image should be less than 1mb in size",
+          })
+        }
 
-    if (files.photo) {
-      product.photo.data = fs.readFileSync(files.photo.path)
-      product.photo.contentType = files.photo.type
-    }
-
-    product.save((err, result) => {
-      if (err) {
-        console.log(err)
+        product.photo.data = fs.readFileSync(photo.path)
+        product.photo.contentType = photo.type
       }
 
-      res.json(result)
-    })
+      if (
+        !name ||
+        !description ||
+        !price ||
+        !category ||
+        !quantity ||
+        !shipping
+      ) {
+        return res.status(400).json({
+          error: "All fields are required",
+        })
+      }
+
+      product.save((err, data) => {
+        if (err) {
+          return res.status(400).json({
+            error: errorHandler(err),
+          })
+        } else {
+          res.json(data)
+        }
+      })
+    }
   })
 }

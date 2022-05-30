@@ -21,14 +21,16 @@ exports.create = (req, res) => {
       let photo = files.photo
 
       // validations
+
       if (photo) {
         if (files.photo.size > 1000000) {
           return res.status(400).json({
             error: "Image should be less than 1mb in size",
           })
         }
-
+        console.log(photo.path)
         product.photo.data = fs.readFileSync(photo.path)
+
         product.photo.contentType = photo.type
       }
 
@@ -56,4 +58,22 @@ exports.create = (req, res) => {
       })
     }
   })
+}
+
+exports.productById = (req, res, next, id) => {
+  Product.findById(id).exec((err, product) => {
+    if (err || !product) {
+      return res.status(400).json({
+        error: "Not Found" + err,
+      })
+    }
+
+    req.product = product
+    next()
+  })
+}
+
+exports.read = (req, res) => {
+  req.product.photo = undefined
+  return res.json(req.product)
 }

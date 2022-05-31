@@ -37,3 +37,21 @@ exports.read = (req, res) => {
     })
   }
 }
+
+exports.update = (req, res) => {
+  const category = req.category
+  category.name = req.body.name
+  category.save((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err),
+      })
+    }
+
+    res.json(data)
+  })
+}
+
+exports.remove = (req, res) => {}
+
+exports.list = (req, res) => {}

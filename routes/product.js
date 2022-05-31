@@ -10,7 +10,7 @@ const {
 const { requireSignin, isAdmin, isAuth } = require("../controllers/auth")
 const { userById } = require("../controllers/user")
 
-//Routes
+// product Routes
 router.get("/product/:productId", read)
 router.post("/product/create/:userId", requireSignin, isAdmin, create)
 router.delete("/product/:productId/:userId", requireSignin, isAdmin, remove)

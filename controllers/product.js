@@ -77,3 +77,19 @@ exports.read = (req, res) => {
   req.product.photo = undefined
   return res.json(req.product)
 }
+
+exports.remove = (req, res) => {
+  let product = req.product
+  product.remove((err, deleted) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Error in deleting" + err,
+      })
+    }
+
+    res.json({
+      deleted,
+      message: "Deleted Successfully",
+    })
+  })
+}

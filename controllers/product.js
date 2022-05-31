@@ -28,8 +28,8 @@ exports.create = (req, res) => {
             error: "Image should be less than 1mb in size",
           })
         }
-        console.log(photo.path)
-        product.photo.data = fs.readFileSync(photo.path)
+        console.log(photo.filepath)
+        product.photo.data = fs.readFileSync(photo.filepath)
 
         product.photo.contentType = photo.type
       }

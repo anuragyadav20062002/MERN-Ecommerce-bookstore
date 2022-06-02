@@ -1,14 +1,18 @@
 const express = require("express")
 require("dotenv").config()
 const mongoose = require("mongoose")
-const authRoutes = require("./routes/auth")
-const userRoutes = require("./routes/user")
-const categoryRoutes = require("./routes/category")
-const productRoutes = require("./routes/product")
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const expressValidator = require("express-validator")
+const cors = require("cors")
+
+//Routes
+
+const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/user")
+const categoryRoutes = require("./routes/category")
+const productRoutes = require("./routes/product")
 
 //app
 const app = express()
@@ -26,6 +30,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(expressValidator())
+app.use(cors())
 
 //routes middleware
 app.use("/api", authRoutes)

@@ -170,7 +170,26 @@ exports.list = (req, res) => {
           error: "Products not found",
         })
       } else {
-        res.send(products)
+        res.json(products)
+      }
+    })
+}
+
+//finding realted products based on req product category
+
+exports.listRelated = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6
+
+  Product.find({ id: { $ne: req.product }, category: req.product.category })
+    .limit(limit)
+    .populate("category", "_id name")
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Products not found",
+        })
+      } else {
+        res.json(products)
       }
     })
 }

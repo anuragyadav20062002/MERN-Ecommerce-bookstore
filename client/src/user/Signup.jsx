@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import Layout from "../core/Layout"
 import { API } from "../config"
 import { Link } from "react-router-dom"
+import { signup } from "../auth"
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -17,22 +18,6 @@ const Signup = () => {
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value })
-  }
-
-  const signup = (user) => {
-    console.log(name, email, password)
-    return fetch(`http://localhost:8000/api/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .catch((err) => {})
   }
 
   const clickSubmit = (event) => {

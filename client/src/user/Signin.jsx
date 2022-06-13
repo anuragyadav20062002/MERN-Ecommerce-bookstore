@@ -69,7 +69,7 @@ const Signin = () => {
 
   const showLoading = () =>
     loading && (
-      <div className="aler alert-info">
+      <div className="alert alert-info">
         <h2>Loading...</h2>
       </div>
     )
@@ -85,7 +85,7 @@ const Signin = () => {
       className="alert alert-danger"
       style={{ display: error ? "" : "none" }}
     >
-      <h2> {error}</h2>
+      {error}
     </div>
   )
 

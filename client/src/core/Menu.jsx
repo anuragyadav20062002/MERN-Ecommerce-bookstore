@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, withRouter } from "react-router-dom"
-import { signout } from "../auth"
+import { signout, isAuthenticated } from "../auth"
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -19,37 +19,49 @@ const Menu = ({ history }) => {
             Home
           </Link>
         </li>
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/signin")}
-            to="/signin"
-          >
-            SignIn
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/signup")}
-            to="/signup"
-          >
-            SignUp
-          </Link>
-        </li>
-        <li className="nav-item">
-          <span
-            className="nav-link"
-            style={{ cursor: "pointer", color: "white" }}
-            onClick={() =>
-              signout(() => {
-                history.push("/")
-              })
-            }
-          >
-            SignOut
-          </span>
-        </li>
+
+        {/* if user is autheticated(loggedin) then signin and signup will not show else will show */}
+
+        {!isAuthenticated() && (
+          <div>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                style={isActive(history, "/signin")}
+                to="/signin"
+              >
+                SignIn
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                style={isActive(history, "/signup")}
+                to="/signup"
+              >
+                SignUp
+              </Link>
+            </li>
+          </div>
+        )}
+
+        {isAuthenticated() && (
+          <div>
+            <li className="nav-item">
+              <span
+                className="nav-link"
+                style={{ cursor: "pointer", color: "white" }}
+                onClick={() =>
+                  signout(() => {
+                    history.push("/")
+                  })
+                }
+              >
+                SignOut
+              </span>
+            </li>
+          </div>
+        )}
       </ul>
     </>
   )

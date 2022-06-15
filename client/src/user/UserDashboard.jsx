@@ -10,7 +10,7 @@ const UserDashboard = () => {
 
   const userLinks = () => {
     return (
-      <div className="card">
+      <div className="card bg-success mb-5" style={{ fontWeight: "bold" }}>
         <h4 className="card-header">User Links</h4>
         <ul className="list-group">
           <li className="list-group-item">
@@ -30,9 +30,9 @@ const UserDashboard = () => {
 
   const userInfo = () => {
     return (
-      <div className="card mb-5" style={{ fontWeight: "bold" }}>
+      <div className="card bg-primary mb-5" style={{ fontWeight: "bold" }}>
         <h3 className="card-header"> User Information</h3>
-        <ul className="list-group">
+        <ul className="list-group ">
           <li className="list-group-item">Name : {name}</li>
           <li className="list-group-item">Email : {email}</li>
           <li className="list-group-item">
@@ -45,7 +45,7 @@ const UserDashboard = () => {
 
   const userHistory = () => {
     return (
-      <div className="card mb-5" style={{ fontWeight: "bold" }}>
+      <div className="card bg-warning mb-5" style={{ fontWeight: "bold" }}>
         <h3 className="card-header">Purchase History</h3>
         <ul className="list-group">
           <li className="list-group-item">history</li>
@@ -60,8 +60,13 @@ const UserDashboard = () => {
       description="User Dashboard"
       className="container"
     >
-      {userInfo()}
-      {userHistory()}
+      <div className="row">
+        <div className="col-3">{userLinks()}</div>
+        <div className="col-9">
+          {userInfo()}
+          {userHistory()}
+        </div>
+      </div>
     </Layout>
   )
 }

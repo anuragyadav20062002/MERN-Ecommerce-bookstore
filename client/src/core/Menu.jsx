@@ -19,6 +19,15 @@ const Menu = ({ history }) => {
             Home
           </Link>
         </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/dashboard")}
+            to="/"
+          >
+            DashBoard
+          </Link>
+        </li>
 
         {/* if user is autheticated(loggedin) then signin and signup will not show else will show */}
 

@@ -57,7 +57,7 @@ const UserDashboard = () => {
   return (
     <Layout
       title="User DashBorad"
-      description="User Dashboard"
+      description="User's Personel Information"
       className="container"
     >
       <div className="row">

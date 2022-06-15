@@ -1,6 +1,6 @@
 export const createCategory = (userId, token, category) => {
   console.log(userId, token, category)
-  return fetch(`http://localhost:8000/api/create/category/${userId}`, {
+  return fetch(`http://localhost:8000/api/category/create/${userId}`, {
     method: "POST",
     headers: {
       Accept: "application/json",

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 import { createProduct } from "./apiadmin"
 
 const AddProduct = () => {
-  const { user, token } = isAuthenticated()
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -23,6 +22,8 @@ const AddProduct = () => {
     redirectToProfile: false,
     formData: "",
   })
+
+  const { user, token } = isAuthenticated()
 
   //destructuring
   const {
@@ -42,7 +43,7 @@ const AddProduct = () => {
 
   //we have to make a new formData for storing everything in formData which will be sent using useEffect
   useEffect(() => {
-    setValues({ ...values, formData: new formData() })
+    setValues({ ...values, formData: new FormData() })
   }, [])
 
   const handleChange = (name) => (event) => {
@@ -51,7 +52,27 @@ const AddProduct = () => {
     setValues({ ...values, [name]: value })
   }
 
-  const clickSubmit = () => {}
+  const clickSubmit = (event) => {
+    event.preventDefault()
+    setValues({ ...values, error: "", loading: true })
+
+    createProduct(user._id, token, formData).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error })
+      } else {
+        setValues({
+          ...values,
+          name: "",
+          description: "",
+          photo: "",
+          price: "",
+          quantity: "",
+          loading: false,
+          createdProduct: data.name,
+        })
+      }
+    })
+  }
 
   const newPostForm = () => (
     <form className="mb-3" onSubmit={clickSubmit}>
@@ -96,6 +117,7 @@ const AddProduct = () => {
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
           <option value="62a9a1093ae5241ae8644865">React</option>
+          <option value="62a9a1093ae5241ae8644865">Python</option>
         </select>
       </div>
       <div className="form-group">

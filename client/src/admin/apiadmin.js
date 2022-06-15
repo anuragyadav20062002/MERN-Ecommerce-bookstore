@@ -30,7 +30,7 @@ export const createProduct = (userId, token, product) => {
     .catch((err) => {})
 }
 export const getCategories = () => {
-  return fetch(`http://localhost:8000/api/product/categories`, {
+  return fetch(`http://localhost:8000/api/categories`, {
     method: "GET",
   })
     .then((response) => {

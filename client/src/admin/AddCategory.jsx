@@ -29,7 +29,8 @@ const AddCategory = () => {
   const newCategoryForm = () => (
     <form onSubmit={clickSubmit}>
       <div className="form-group">
-        <label className="text-muted"></label>
+        <label className="text-muted">Name</label>
+        <br />
         <input
           type="text"
           className="form-control"
@@ -37,12 +38,21 @@ const AddCategory = () => {
           value={name}
           autoFocus
         />
-        <button className="btn btn-outline-primary">Create Category</button>
       </div>
+      <button className="btn btn-outline-primary">Create Category</button>
     </form>
   )
 
-  return <></>
+  return (
+    <Layout
+      title="Add a new Category"
+      description={`Hellow ${name}, ready to add a new category`}
+    >
+      <div className="row">
+        <div className="col-md-8 offset-md-2">{newCategoryForm()}</div>
+      </div>
+    </Layout>
+  )
 }
 
 export default AddCategory

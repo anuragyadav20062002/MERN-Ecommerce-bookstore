@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import Layout from "../core/Layout"
 import { isAuthenticated } from "../auth"
 import { Link } from "react-router-dom"
+import { createCategory } from "./apiadmin"
 
 const AddCategory = () => {
   const [name, setName] = useState("")
@@ -24,6 +25,15 @@ const AddCategory = () => {
     setSucess(false)
 
     //make request to api to create category
+    createCategory(user._id, token, { name }).then((data) => {
+      if (data.error) {
+        setError(data.error)
+      } else {
+        setError("")
+        setSucess(true)
+        console.log("Successfully created category")
+      }
+    })
   }
 
   const newCategoryForm = () => (
@@ -43,13 +53,28 @@ const AddCategory = () => {
     </form>
   )
 
+  const showSuccess = () => {
+    if (success) {
+      return <h3 className="text-success">{name} is created</h3>
+    }
+  }
+  const showError = () => {
+    if (error) {
+      return <h3 className="text-danger">{name} is should be unique</h3>
+    }
+  }
+
   return (
     <Layout
       title="Add a new Category"
-      description={`Hellow ${name}, ready to add a new category`}
+      description={`Hello ${user.name}, ready to add a new category`}
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2">{newCategoryForm()}</div>
+        <div className="col-md-8 offset-md-2">
+          {showError}
+          {showSuccess}
+          {newCategoryForm()}
+        </div>
       </div>
     </Layout>
   )

@@ -64,6 +64,13 @@ const AddCategory = () => {
       return <h3 className="text-danger">{name} is already created</h3>
     }
   }
+  const goBack = () => (
+    <div className="mt-5" style={{ fontWeight: "bold", fontSize: "large" }}>
+      <Link to="/admin/dashboard" className="text-warning">
+        Back To Dashboard
+      </Link>
+    </div>
+  )
 
   return (
     <Layout
@@ -75,6 +82,7 @@ const AddCategory = () => {
           {showError()}
           {showSuccess()}
           {newCategoryForm()}
+          {goBack()}
         </div>
       </div>
     </Layout>

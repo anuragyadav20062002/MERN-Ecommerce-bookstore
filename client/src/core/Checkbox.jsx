@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 
-const Checkbox = ({ categories }) => {
+const Checkbox = ({ categories, handleFilters }) => {
   const [checked, setChecked] = useState([])
 
   const handleToggle = (c) => () => {
@@ -18,8 +18,9 @@ const Checkbox = ({ categories }) => {
       newcheckedCategoryId.splice(currentCategoryId, 1)
     }
 
-    console.log(newcheckedCategoryId)
+    // console.log(newcheckedCategoryId)
     setChecked(newcheckedCategoryId)
+    handleFilters(newcheckedCategoryId)
   }
 
   return categories.map((category, i) => (

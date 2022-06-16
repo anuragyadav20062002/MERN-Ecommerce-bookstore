@@ -44,16 +44,30 @@ const Home = () => {
 
   return (
     <>
-      <Layout title="Home Page" description="Node React E-commerce App">
-        <h2 className="mb-4">Best Sellers</h2>
-        {productBySell.map((product, i) => (
-          <Card key={i} product={product} />
-        ))}
+      <Layout
+        title="Home Page"
+        description="Node React E-commerce App"
+        className="container-fluid"
+      >
+        <h2 className="mb-4" style={{ textAlign: "center" }}>
+          New Arrivals
+        </h2>
+        <div className="row">
+          {productByArrival.map((product, i) => (
+            <Card key={i} product={product} />
+          ))}
+        </div>
+
         <hr />
-        <h2 className="mb-4">New Arrival</h2>
-        {productByArrival.map((product, i) => (
-          <Card key={i} product={product} />
-        ))}
+
+        <h2 className="mb-4" style={{ textAlign: "center" }}>
+          Best Sellers
+        </h2>
+        <div className="row">
+          {productBySell.map((product, i) => (
+            <Card key={i} product={product} />
+          ))}
+        </div>
       </Layout>
     </>
   )

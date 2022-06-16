@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import Layout from "./Layout"
 import { getProducts } from "./apiCode"
 import Card from "./Card"
+import { API } from "../config"
 
 const Home = () => {
   const [productBySell, setProductBySell] = useState([])
@@ -41,6 +42,7 @@ const Home = () => {
   useEffect(() => {
     loadProductByArrival()
     loadProductBySell()
+    console.log(API)
   }, [])
 
   return (

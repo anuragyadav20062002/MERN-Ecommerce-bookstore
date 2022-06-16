@@ -8,7 +8,7 @@ const Card = ({ product }) => {
         <div className="card-header">{product.name}</div>
         <div className="card-body">
           <p>{product.description}</p>
-          <p>{product.price}</p>
+          <p>${product.price}</p>
           <Link to="/">
             <button className="btn btn-outline-primary mt-2 mb-2">
               View Product

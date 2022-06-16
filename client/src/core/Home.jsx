@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react"
 import Layout from "./Layout"
 import { getProducts } from "./apiCode"
+import Card from "./Card"
 
 const Home = () => {
   const [productBySell, setProductBySell] = useState([])
@@ -14,6 +15,7 @@ const Home = () => {
     getProducts("sold").then((data) => {
       if (data.error) {
         setError(data.error)
+        console.log(error)
       } else {
         setProductBySell(data)
       }
@@ -26,6 +28,7 @@ const Home = () => {
     getProducts("createdAt").then((data) => {
       if (data.error) {
         setError(data.error)
+        console.log(error)
       } else {
         setProductByArrival(data)
       }
@@ -37,14 +40,20 @@ const Home = () => {
   useEffect(() => {
     loadProductByArrival()
     loadProductBySell()
-  })
+  }, [])
 
   return (
     <>
       <Layout title="Home Page" description="Node React E-commerce App">
-        {JSON.stringify(productByArrival)}
+        <h2 className="mb-4">Best Sellers</h2>
+        {productBySell.map((product, i) => (
+          <Card key={i} product={product} />
+        ))}
         <hr />
-        {JSON.stringify(productByArrival)}
+        <h2 className="mb-4">New Arrival</h2>
+        {productByArrival.map((product, i) => (
+          <Card key={i} product={product} />
+        ))}
       </Layout>
     </>
   )

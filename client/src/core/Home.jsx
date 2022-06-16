@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import Layout from "./Layout"
-import { getProducts } from "./apiCode"
+import { getProducts } from "./apiCore"
 import Card from "./Card"
 import { API } from "../config"
 

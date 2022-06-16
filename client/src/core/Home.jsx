@@ -1,5 +1,6 @@
 import React from "react"
 import Layout from "./Layout"
+import { getProducts } from "./apiCode"
 
 const Home = () => {
   return (

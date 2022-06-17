@@ -41,6 +41,16 @@ const Search = () => {
     searchData()
   }
 
+  const searchedProducts = (results = []) => {
+    return (
+      <div className="row">
+        {results.map((product, i) => (
+          <Card key={i} product={product} />
+        ))}
+      </div>
+    )
+  }
+
   const handleChange = (name) => (event) => {
     setData({ ...data, [name]: event.target.value, searched: false })
   }
@@ -80,10 +90,8 @@ const Search = () => {
 
   return (
     <div>
-      <div className="container mb-3">
-        {JSON.stringify(results)}
-        {searchForm()}
-      </div>
+      <div className="container mb-3">{searchedProducts(results)}</div>
+      <div className="container mb-3">{searchForm()}</div>
     </div>
   )
 }

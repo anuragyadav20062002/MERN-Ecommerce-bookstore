@@ -52,7 +52,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
 export const list = (params) => {
   const query = quesryString.stringify(params)
   console.log(query)
-  return fetch(`http://localhost:8000/api/products?${query}`, {
+  return fetch(`http://localhost:8000/api/products/search?${query}`, {
     method: "GET",
   })
     .then((response) => {

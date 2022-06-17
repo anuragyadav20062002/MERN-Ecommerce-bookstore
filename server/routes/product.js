@@ -11,6 +11,7 @@ const {
   listCategories,
   listBySearch,
   photo,
+  listSearch,
 } = require("../controllers/product")
 const { requireSignin, isAdmin, isAuth } = require("../controllers/auth")
 const { userById } = require("../controllers/user")

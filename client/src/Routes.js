@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Signin from "./user/Signin"
 import Signup from "./user/Signup"
 import Home from "./core/Home"
-import Menu from "./core/Menu"
+import Layout from "./core/Layout"
 import PrivateRoute from "./auth/PrivateRoute"
 import UserDashboard from "./user/UserDashboard"
 import AdminRoute from "./auth/AdminRoute"
@@ -16,7 +16,6 @@ import Shop from "./core/Shop"
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Menu />
       <Switch>
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />

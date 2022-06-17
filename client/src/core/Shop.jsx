@@ -28,10 +28,28 @@ const Shop = () => {
     init()
   }, [])
 
+  const handlePrice = (value) => {
+    const data = prices
+    let array = []
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value)) {
+        array = data[key].array
+      }
+    }
+
+    return array
+  }
+
   const handleFilters = (filters, filterBy) => {
     console.log("Shop", filters, filterBy)
     const newFilters = { ...myFilters }
     newFilters.filters[filterBy] = filters
+
+    if (filterBy === "price") {
+      let priceValues = handlePrice(filters)
+      newFilters.filters[filterBy] = priceValues
+    }
     setMyFilters(newFilters)
   }
 
@@ -53,7 +71,10 @@ const Shop = () => {
             </ul>
             <h4>Filter By Price Range</h4>
             <div>
-              <RadioBox prices={prices} />
+              <RadioBox
+                prices={prices}
+                handleFilters={(filters) => handleFilters(filters, "price")}
+              />
             </div>
           </div>
           <div className="col-8">{JSON.stringify(myFilters)}</div>

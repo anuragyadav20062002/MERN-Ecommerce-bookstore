@@ -2,18 +2,22 @@
 import React from "react"
 import { useState, useEffect, Fragment } from "react"
 
-const RadioBox = ({ prices }) => {
+const RadioBox = ({ prices, handleFilters }) => {
   const [value, setValue] = useState(0)
 
-  const handleChange = (p) => () => {}
+  const handleChange = (event) => {
+    handleFilters(event.target.value)
+    setValue(event.target.value)
+  }
 
   return prices.map((p, i) => (
     <div key={i}>
       <input
-        onChange={handleChange(p._id)}
+        onChange={handleChange}
         type="radio"
         value={`${p._id}`}
         className="mr-2 ml-4"
+        name={p}
       />
       <label className="form-check-label">{p.name}</label>
     </div>

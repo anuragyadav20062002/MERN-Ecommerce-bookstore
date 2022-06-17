@@ -19,7 +19,8 @@ const Checkbox = ({ categories, handleFilters }) => {
     }
 
     // console.log(newcheckedCategoryId)
-    setChecked(newcheckedCategoryId)(newcheckedCategoryId)
+    setChecked(newcheckedCategoryId)
+    handleFilters(newcheckedCategoryId)
   }
 
   return categories.map((category, i) => (

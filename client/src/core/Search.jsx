@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
-import { getCategories } from "./apiCore"
+import { getCategories, list } from "./apiCore"
 import Card from "./Card"
 
 const Search = () => {
@@ -24,8 +24,26 @@ const Search = () => {
     })
   }
 
-  const searchSubmit = () => {}
-  const handleChange = () => {}
+  const searchData = () => {
+    if (search) {
+      list({ search: search || undefined, category: category }).then((res) => {
+        if (res.error) {
+          console.log(res.error)
+        } else {
+          setData({ ...data, results: res, searched: true })
+        }
+      })
+    }
+  }
+
+  const searchSubmit = (e) => {
+    e.preventDefault()
+    searchData()
+  }
+
+  const handleChange = (name) => (event) => {
+    setData({ ...data, [name]: event.target.value, searched: false })
+  }
 
   const searchForm = () => (
     <form onSubmit={searchSubmit}>
@@ -62,7 +80,10 @@ const Search = () => {
 
   return (
     <div>
-      <div className="container">{searchForm()}</div>
+      <div className="container mb-3">
+        {JSON.stringify(results)}
+        {searchForm()}
+      </div>
     </div>
   )
 }

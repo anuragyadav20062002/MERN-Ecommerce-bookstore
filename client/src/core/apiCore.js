@@ -1,4 +1,5 @@
 import { API } from "../config"
+import quesryString from "query-string"
 
 export const getProducts = (sortBy) => {
   return fetch(
@@ -46,4 +47,18 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
       return response.json()
     })
     .catch((err) => {})
+}
+
+export const list = (params) => {
+  const query = quesryString.stringify(params)
+  console.log(query)
+  return fetch(`http://localhost:8000/api/products?${query}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }

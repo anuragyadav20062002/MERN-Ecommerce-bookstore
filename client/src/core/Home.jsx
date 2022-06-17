@@ -55,7 +55,7 @@ const Home = () => {
         <h2 className="mb-4" style={{ textAlign: "center" }}>
           New Arrivals
         </h2>
-        <div className="row">
+        <div className="row ml-4">
           {productByArrival.map((product, i) => (
             <Card key={i} product={product} />
           ))}
@@ -66,7 +66,7 @@ const Home = () => {
         <h2 className="mb-4" style={{ textAlign: "center" }}>
           Best Sellers
         </h2>
-        <div className="row">
+        <div className="row ml-4">
           {productBySell.map((product, i) => (
             <Card key={i} product={product} />
           ))}

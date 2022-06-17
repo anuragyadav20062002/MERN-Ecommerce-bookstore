@@ -24,14 +24,45 @@ const Search = () => {
     })
   }
 
+  const searchSubmit = () => {}
+  const handleChange = () => {}
+
+  const searchForm = () => (
+    <form onSubmit={searchSubmit}>
+      <span className="input-group-text mb-4">
+        <div className="input-group input-group-lg">
+          <div className="input-group-prepend">
+            <select className="btn mr-2" onChange={handleChange("category")}>
+              <option value="All">Pick Category</option>
+              {categories.map((c, i) => (
+                <option style={{ textAlign: "left" }} value={c._id} key={i}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <input
+            type="search"
+            className="form-control"
+            onChange={handleChange("search")}
+            placeholder="Search by name"
+          />
+        </div>
+
+        <div className="btn input-group-append" style={{ border: "none" }}>
+          <button className="input-group-text">Search</button>
+        </div>
+      </span>
+    </form>
+  )
+
   useEffect(() => {
     loadCategories()
   }, [])
 
   return (
     <div>
-      <h2>Search Bar</h2>
-      <h2>{JSON.stringify(categories)}</h2>
+      <div className="container">{searchForm()}</div>
     </div>
   )
 }

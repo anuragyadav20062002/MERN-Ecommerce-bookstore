@@ -6,6 +6,19 @@ body {
  * single product page - product name
  */
 
+/*cart badge*/
+
+.cart-badge,
+.cart-badge:hover {
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 12px;
+  font-style: italic;
+  background: #23d5ab;
+  color: black;
+  font-weight: bold;
+}
+
 .name {
   background: #827397;
   color: #fff;

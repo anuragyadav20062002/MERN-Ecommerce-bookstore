@@ -25,6 +25,7 @@ const Cart = () => {
           product={product}
           showAddToCardButton={false}
           cartUpdate={true}
+          showRemoveProductButton={true}
         />
       ))}
     </div>

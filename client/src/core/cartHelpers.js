@@ -79,4 +79,6 @@ export const removeItem = (productId, count) => {
 
     localStorage.setItem("cart", JSON.stringify(cart))
   }
+
+  return cart
 }

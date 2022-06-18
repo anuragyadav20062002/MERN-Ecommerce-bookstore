@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import Layout from "./Layout"
 import { getCart, itemTotal } from "./cartHelpers"
 import Card from "./Card"
+import { isAuthenticated } from "../auth"
 
 const Checkout = ({ products }) => {
   const getTotal = () => {
@@ -15,6 +16,14 @@ const Checkout = ({ products }) => {
   return (
     <div>
       <h2>Total : ${getTotal()}</h2>
+      <br />
+      {isAuthenticated() ? (
+        <button className="btn btn-success">CheckOut</button>
+      ) : (
+        <Link to="/signin">
+          <button className="btn btn-primary">SignIn First</button>
+        </Link>
+      )}
     </div>
   )
 }

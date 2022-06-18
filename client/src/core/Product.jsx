@@ -22,7 +22,6 @@ const Product = (props) => {
             console.log(res.error)
           } else {
             setRelatedProduct(res)
-            console.log("related", res)
           }
         })
       }

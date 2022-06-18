@@ -2,28 +2,27 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Layout from "./Layout"
-import { getCart } from "./cartHelpers"
+import { getCart, itemTotal } from "./cartHelpers"
 import Card from "./Card"
 
 const Cart = () => {
   const [items, setitems] = useState([])
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     //populating items state when page refreshes
     setitems(getCart())
+    setTotal(itemTotal)
   }, [])
 
-  const showItems = (items) => {
-    return (
-      <div>
-        <h2>Your Cart Has {`${items.length}`} items</h2>
-        <hr />
-        {items.map((item, i) => (
-          <Card key={i} product={item} />
-        ))}
-      </div>
-    )
-  }
+  const showItems = (items) => (
+    <div>
+      <h2>Your cart has {total} items</h2>
+      {items.map((product, i) => (
+        <Card key={i} product={product} />
+      ))}
+    </div>
+  )
 
   const noItemsMessage = () => (
     <h2>
@@ -40,8 +39,9 @@ const Cart = () => {
       >
         <div className="row">
           <div className="col-6">
-            {items.length > 0 ? showItems() : noItemsMessage()}
+            {items.length > 0 ? showItems(items) : noItemsMessage()}
           </div>
+          <div className="col-6">Check out </div>
         </div>
       </Layout>
     </>

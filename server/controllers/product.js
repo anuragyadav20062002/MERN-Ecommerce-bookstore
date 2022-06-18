@@ -61,16 +61,18 @@ exports.create = (req, res) => {
 }
 
 exports.productById = (req, res, next, id) => {
-  Product.findById(id).exec((err, product) => {
-    if (err || !product) {
-      return res.status(400).json({
-        error: "Not Found" + err,
-      })
-    }
+  Product.findById(id)
+    .populate("category")
+    .exec((err, product) => {
+      if (err || !product) {
+        return res.status(400).json({
+          error: "Not Found" + err,
+        })
+      }
 
-    req.product = product
-    next()
-  })
+      req.product = product
+      next()
+    })
 }
 
 exports.read = (req, res) => {

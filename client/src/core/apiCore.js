@@ -74,3 +74,15 @@ export const read = (productId) => {
       console.log(err)
     })
 }
+
+export const listRelatedCategories = (productId) => {
+  return fetch(`http://localhost:8000/api/products/related/${productId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

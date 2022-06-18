@@ -18,11 +18,7 @@ const Card = ({ product, showViewProductButton = true }) => {
 
   const showAddToCartButton = () => {
     return (
-      <Link>
-        <button className="btn btn-outline-warning mt-2 mb-2">
-          Add to Cart
-        </button>
-      </Link>
+      <button className="btn btn-outline-warning mt-2 mb-2">Add to Cart</button>
     )
   }
 

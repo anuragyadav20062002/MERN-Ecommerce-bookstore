@@ -5,7 +5,11 @@ import moment from "moment"
 import { addItem } from "./cartHelpers"
 import { useState } from "react"
 
-const Card = ({ product, showViewProductButton = true }) => {
+const Card = ({
+  product,
+  showViewProductButton = true,
+  showAddToCardButton = true,
+}) => {
   const [redirect, setRedirect] = useState(false)
 
   const showViewButton = (showViewProductButton) => {
@@ -32,11 +36,16 @@ const Card = ({ product, showViewProductButton = true }) => {
     }
   }
 
-  const showAddToCartButton = () => {
+  const showAddToCart = (showAddToCardButton) => {
     return (
-      <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2">
-        Add to Cart
-      </button>
+      showAddToCardButton && (
+        <button
+          onClick={addToCart}
+          className="btn btn-outline-warning mt-2 mb-2"
+        >
+          Add to Cart
+        </button>
+      )
     )
   }
 
@@ -70,7 +79,7 @@ const Card = ({ product, showViewProductButton = true }) => {
 
         {showViewButton(showViewProductButton)}
 
-        {showAddToCartButton()}
+        {showAddToCart(showAddToCardButton)}
       </div>
     </div>
   )

@@ -43,6 +43,6 @@ export const getCart = () => {
       return JSON.parse(localStorage.getItem("cart"))
     }
 
-    return 0
+    return []
   }
 }

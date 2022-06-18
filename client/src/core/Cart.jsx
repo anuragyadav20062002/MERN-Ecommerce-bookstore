@@ -13,7 +13,7 @@ const Cart = () => {
     //populating items state when page refreshes
     setitems(getCart())
     setTotal(itemTotal)
-  }, [])
+  }, [items])
 
   const showItems = (items) => (
     <div>

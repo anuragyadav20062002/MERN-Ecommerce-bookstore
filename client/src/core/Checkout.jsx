@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import Layout from "./Layout"
 import { getCart, itemTotal } from "./cartHelpers"
-import Card from "./Card"
 import { isAuthenticated } from "../auth"
 
 const Checkout = ({ products }) => {
@@ -13,17 +11,20 @@ const Checkout = ({ products }) => {
     }, 0)
   }
 
+  const showCheckOut = () =>
+    isAuthenticated() ? (
+      <button className="btn btn-success">CheckOut</button>
+    ) : (
+      <Link to="/signin">
+        <button className="btn btn-primary">SignIn To Checkout</button>
+      </Link>
+    )
+
   return (
     <div>
       <h2>Total : ${getTotal()}</h2>
       <br />
-      {isAuthenticated() ? (
-        <button className="btn btn-success">CheckOut</button>
-      ) : (
-        <Link to="/signin">
-          <button className="btn btn-primary">SignIn First</button>
-        </Link>
-      )}
+      {showCheckOut()}
     </div>
   )
 }

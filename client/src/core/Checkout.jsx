@@ -45,6 +45,19 @@ const Checkout = ({ products }) => {
     )
   }
 
+  const buy = () => {
+    //send the nonce to server
+    //nonce = data.instance.requestPaymentMenthod
+
+    let nonce
+    let getNonce = data.instance.requestPaymentMenthod().then((data) => {
+      console.log(data)
+      nonce = data.nonce
+
+      //
+    })
+  }
+
   const showDropIn = () => (
     <div>
       {data.clientToken !== null && products.length > 0 ? (
@@ -55,7 +68,9 @@ const Checkout = ({ products }) => {
             }}
             onInstance={(instance) => (data.instance = instance)}
           />
-          <button className="btn btn-success">Checkout</button>
+          <button onClick={buy} className="btn btn-success">
+            Pay
+          </button>
         </div>
       ) : null}
     </div>

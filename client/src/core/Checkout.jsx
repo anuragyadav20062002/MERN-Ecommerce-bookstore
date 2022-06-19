@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { getCart, itemTotal } from "./cartHelpers"
 import { isAuthenticated } from "../auth"
 import { getBraintreeClientToken } from "./apiCore"
+import DropIn from "braintree-web-drop-in-react"
 
 const Checkout = ({ products }) => {
   const [data, setData] = useState({
@@ -33,14 +34,31 @@ const Checkout = ({ products }) => {
     }, 0)
   }
 
-  const showCheckOut = () =>
-    isAuthenticated() ? (
-      <button className="btn btn-success">CheckOut</button>
+  const showCheckout = () => {
+    return isAuthenticated() ? (
+      <div>{showDropIn()}</div>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-primary">SignIn To Checkout</button>
+        <button className="btn btn-primary">Sign in to checkout</button>
       </Link>
     )
+  }
+
+  const showDropIn = () => (
+    <div>
+      {data.clientToken !== null && products.length > 0 ? (
+        <div>
+          <DropIn
+            options={{
+              authorization: data.clientToken,
+            }}
+            onInstance={(instance) => (data.instance = instance)}
+          />
+          <button className="btn btn-success">Checkout</button>
+        </div>
+      ) : null}
+    </div>
+  )
 
   useEffect(() => {
     getToken(userId, token)
@@ -50,7 +68,7 @@ const Checkout = ({ products }) => {
     <div>
       <h2>Total : ${getTotal()}</h2>
       <br />
-      {showCheckOut()}
+      {showCheckout()}
     </div>
   )
 }

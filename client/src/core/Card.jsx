@@ -54,7 +54,7 @@ const Card = ({
       showRemoveProductButton && (
         <button
           onClick={() => removeItem(product._id)}
-          className="btn btn-outline-danger mt-2 mb-2"
+          className="btn btn-outline-danger mt-2 mb-2 ml-3"
         >
           Remove Product
         </button>

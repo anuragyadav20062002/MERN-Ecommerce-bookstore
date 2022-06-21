@@ -68,7 +68,7 @@ const Checkout = ({ products }) => {
   }
 
   const showDropIn = () => (
-    <div>
+    <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <DropIn
@@ -84,6 +84,14 @@ const Checkout = ({ products }) => {
       ) : null}
     </div>
   )
+  const showError = (error) => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  )
 
   useEffect(() => {
     getToken(userId, token)
@@ -93,6 +101,7 @@ const Checkout = ({ products }) => {
     <div>
       <h2>Total : ${getTotal()}</h2>
       <br />
+      {showError(data.error)}
       {showCheckout()}
     </div>
   )

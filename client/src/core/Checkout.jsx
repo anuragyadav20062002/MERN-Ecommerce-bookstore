@@ -24,7 +24,7 @@ const Checkout = ({ products }) => {
       if (data.error) {
         setData({ ...data, error: data.error })
       } else {
-        setData({ ...data, clientToken: data.clientToken })
+        setData({ clientToken: data.clientToken })
       }
     })
   }
@@ -67,7 +67,12 @@ const Checkout = ({ products }) => {
         }
 
         processPayment(userId, token, paymentData)
-          .then((res) => console.log(res))
+          .then((response) => {
+            setData({ ...data, success: response.success })
+
+            //empty card
+            //create order
+          })
           .catch((error) => console.log(error))
       })
       .catch((err) => {
@@ -101,6 +106,14 @@ const Checkout = ({ products }) => {
       {error}
     </div>
   )
+  const showSuccess = (success) => (
+    <div
+      className="alert alert-info"
+      style={{ display: success ? "" : "none" }}
+    >
+      Thanks! Your Payment was successful
+    </div>
+  )
 
   useEffect(() => {
     getToken(userId, token)
@@ -110,6 +123,7 @@ const Checkout = ({ products }) => {
     <div>
       <h2>Total : ${getTotal()}</h2>
       <br />
+      {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
     </div>

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { getCart, itemTotal } from "./cartHelpers"
+import { emptyCart } from "./cartHelpers"
 import { isAuthenticated } from "../auth"
 import { getBraintreeClientToken, processPayment } from "./apiCore"
 import DropIn from "braintree-web-drop-in-react"
@@ -71,6 +71,10 @@ const Checkout = ({ products }) => {
             setData({ ...data, success: response.success })
 
             //empty card
+
+            emptyCart(() => {
+              console.log("Payment sucess empty cart")
+            })
             //create order
           })
           .catch((error) => console.log(error))

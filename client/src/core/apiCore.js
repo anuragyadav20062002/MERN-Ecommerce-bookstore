@@ -123,7 +123,7 @@ export const processPayment = (userId, token, paymentData) => {
 }
 
 export const createOrder = (userId, token, createOrderData) => {
-  return fetch(`http://localhost:8000/api/order/create/${userId}`, {
+  return fetch(`${API}/order/create/${userId}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -135,7 +135,5 @@ export const createOrder = (userId, token, createOrderData) => {
     .then((response) => {
       return response.json()
     })
-    .catch((err) => {
-      console.log(err)
-    })
+    .catch((err) => console.log(err))
 }

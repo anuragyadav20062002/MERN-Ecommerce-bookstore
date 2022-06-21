@@ -297,7 +297,12 @@ exports.decreaseQuantity = (req, res, next) => {
     return {
       updateOne: {
         filter: { _id: item._id },
-        update: { $inc: { quantity: -item.count, sold: +item.count } },
+        update: {
+          $inc: {
+            quantity: -item.count,
+            sold: +item.count,
+          },
+        },
       },
     }
   })
@@ -308,6 +313,7 @@ exports.decreaseQuantity = (req, res, next) => {
         error: "Could not update product",
       })
     }
+
     next()
   })
 }

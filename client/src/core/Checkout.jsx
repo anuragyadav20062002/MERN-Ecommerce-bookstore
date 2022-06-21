@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { getCart, itemTotal } from "./cartHelpers"
 import { isAuthenticated } from "../auth"
-import { getBraintreeClientToken } from "./apiCore"
+import { getBraintreeClientToken, processPayment } from "./apiCore"
 import DropIn from "braintree-web-drop-in-react"
 
 const Checkout = ({ products }) => {
@@ -53,16 +53,25 @@ const Checkout = ({ products }) => {
     let getNonce = data.instance
       .requestPaymentMethod()
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         nonce = data.nonce
 
         //once you have nonce (card type,number) send nonce as 'paymentMethodNonce'
         //and aslo total to be charged
 
-        console.log("send nonce ", nonce, getTotal(products))
+        // console.log("send nonce ", nonce, getTotal(products))
+
+        const paymentData = {
+          paymentMethodNonce: nonce,
+          amount: getTotal(products),
+        }
+
+        processPayment(userId, token, paymentData)
+          .then((res) => console.log(res))
+          .catch((error) => console.log(error))
       })
       .catch((err) => {
-        console.log("dropin error", err)
+        // console.log("dropin error", err)
         setData({ ...data, error: err.message })
       })
   }
@@ -77,7 +86,7 @@ const Checkout = ({ products }) => {
             }}
             onInstance={(instance) => (data.instance = instance)}
           />
-          <button onClick={buy} className="btn btn-success">
+          <button onClick={buy} className="btn btn-success btn-block">
             Pay
           </button>
         </div>

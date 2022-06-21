@@ -14,7 +14,7 @@ router.post(
   create
 )
 
-router.get('/order/list/"userId', requireSignin, isAuth, isAdmin, listOrders)
+router.get("/order/list/:userId", requireSignin, isAuth, isAdmin, listOrders)
 
 router.param("userId", userById)
 module.exports = router

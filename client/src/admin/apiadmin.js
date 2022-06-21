@@ -1,3 +1,5 @@
+import { API } from "../config"
+
 export const createCategory = (userId, token, category) => {
   console.log(category)
   return fetch(`http://localhost:8000/api/category/create/${userId}`, {
@@ -39,4 +41,17 @@ export const getCategories = () => {
     .catch((err) => {
       console.log(err)
     })
+}
+export const listOrders = (userId, token) => {
+  return fetch(`${API}/order/list/${userId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => console.log(err))
 }

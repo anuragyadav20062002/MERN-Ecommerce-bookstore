@@ -50,12 +50,21 @@ const Checkout = ({ products }) => {
     //nonce = data.instance.requestPaymentMenthod
 
     let nonce
-    let getNonce = data.instance.requestPaymentMenthod().then((data) => {
-      console.log(data)
-      nonce = data.nonce
+    let getNonce = data.instance
+      .requestPaymentMethod()
+      .then((data) => {
+        console.log(data)
+        nonce = data.nonce
 
-      //
-    })
+        //once you have nonce (card type,number) send nonce as 'paymentMethodNonce'
+        //and aslo total to be charged
+
+        console.log("send nonce ", nonce, getTotal(products))
+      })
+      .catch((err) => {
+        console.log("dropin error", err)
+        setData({ ...data, error: err.message })
+      })
   }
 
   const showDropIn = () => (

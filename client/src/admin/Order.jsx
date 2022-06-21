@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import Layout from "../core/Layout"
 import { isAuthenticated } from "../auth"
 import { Link } from "react-router-dom"
-import { listOrders, getStatusValues } from "./apiadmin"
+import { listOrders, getStatusValues, updateOrderStatus } from "./apiadmin"
 import moment from "moment"
 
 const Order = () => {
@@ -59,7 +59,13 @@ const Order = () => {
   )
 
   const handleStatusChange = (e, orderid) => {
-    console.log("update product status")
+    updateOrderStatus(user._id, token, orderid, e.target.value).then((data) => {
+      if (data.error) {
+        console.log("status update failed")
+      } else {
+        loadOrders()
+      }
+    })
   }
 
   const showStatus = (o) => (

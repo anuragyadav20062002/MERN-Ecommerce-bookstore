@@ -39,11 +39,11 @@ exports.orderById = (req, res, next, id) => {
     .populate("products.product", "name price")
     .exec((err, order) => {
       if (err || !order) {
-        return res.status(400).json({
-          error: errorHandler(error),
-        })
+        console.log(err)
       }
+
       req.order = order
+
       next()
     })
 }
@@ -58,7 +58,6 @@ exports.updateOrderStatus = (req, res) => {
           error: errorHandler(err),
         })
       }
-
       res.json(order)
     }
   )

@@ -92,7 +92,7 @@ export const getStatusValues = (userId, token) => {
 //delete single product
 
 export const getProducts = () => {
-  return fetch(`http://localhost:8000/api/products`, {
+  return fetch(`http://localhost:8000/api/products?limit=undefined`, {
     method: "GET",
   })
     .then((response) => {

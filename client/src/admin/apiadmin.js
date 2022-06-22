@@ -84,3 +84,21 @@ export const getStatusValues = (userId, token) => {
     })
     .catch((err) => console.log(err))
 }
+
+//to perform crud operation
+//get all products
+//get single product
+//update single product
+//delete single product
+
+export const getProducts = () => {
+  return fetch(`http://localhost:8000/api/products`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

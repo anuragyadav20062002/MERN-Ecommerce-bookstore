@@ -37,8 +37,8 @@ const Profile = ({ match }) => {
   return (
     <>
       <Layout
-        title={`User Profile`}
-        description={`You can View or Update your profile here`}
+        title={`${name}'s Profile`}
+        description={`Hey ${name} You can Update your profile here`}
         className="container-fluid"
       >
         <h2>Profile Update</h2>

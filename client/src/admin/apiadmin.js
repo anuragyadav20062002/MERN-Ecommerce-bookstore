@@ -117,3 +117,15 @@ export const deleteProduct = (productId, userId, token) => {
     })
     .catch((err) => console.log(err))
 }
+
+export const getProduct = (productId) => {
+  return fetch(`http://localhost:8000/api/product/${productId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

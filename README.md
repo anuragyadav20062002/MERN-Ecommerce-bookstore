@@ -19,3 +19,5 @@ This is a fully functional Ecommerce Bookstore for buying books.
 
 <h2>Video Link</h2>
 <p>https://drive.google.com/file/d/140u2h1FnuOzrCTtEIlO7OmWfb72ekocb/view?usp=sharing</p>
+
+<h4>Please feel free to provide any changes or modifications in styling or anything</h4>
